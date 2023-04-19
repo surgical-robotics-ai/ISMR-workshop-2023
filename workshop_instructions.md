@@ -5,7 +5,7 @@ In the following workshop, we will going through the process of training deep le
 
 |             Video input to Network              |       Video output (segmentations) from Network       |
 | :---------------------------------------------: | :---------------------------------------------------: |
-| <img src='./images/raw_video.gif' width="500"/> | <img src='./images/inferred_video.gif' width="500" /> |
+| <img src='./images/raw_video.gif' width="400"/> | <img src='./images/inferred_video.gif' width="400" /> |
 
 <hr>
 
@@ -112,82 +112,64 @@ This will open the simulated suturing environment seen in the images above.
 
 ### <font size="+3"> <b>dVRK segmentation scripts installation</b></font>
 
-All information about the dVRK segmentation scripts can be seen [here](https://github.com/Accelnet-project-repositories/dVRK-segmentation-models.git). To download the assets follow below:
-
-**Basic installation**
+All information about the dVRK segmentation scripts can be seen [here](https://github.com/Accelnet-project-repositories/dVRK-segmentation-models.git). To download the code please follow below:
 
 ```bash
 git clone https://github.com/Accelnet-project-repositories/dVRK-segmentation-models.git
 cd dVRK-segmentation-models
-pip install -e . -r requirements.txt
 ```
 
-<div>
-<pre>
-<code>
-git clone https://github.com/Accelnet-project-repositories/dVRK-segmentation-models.git
-cd dVRK-segmentation-models
-pip install -e . -r requirements.txt
-</code>
-</pre>
-</div>
+To run and install the necessary code we provide two different options
+  1. Python system wide setup: A minimal installation that allows the people to run the code without installing heavy dependencies such as pytorch or cuda. This instructions are only for people planning to use colab for the neural network training.  
+  2. Anaconda virtual environment setup (advanced): Recomended for people with access to a GPU in their laptop and who would like to run the neural network in real-time.
 
-# Test details
+**Note:** A third but not recommended option would be to install all the code dependencies in your system-wide python intepreter. Installing packages on your [system-wide interpreter](www.activestate.com/blog/how-to-manage-python-environments-global-vs-virtual/) is not usually recommended as it can lead to dependencies conflicts. If installing packages in your global interpreter is not a concern you, e.g., if you are working from a docker container, you can skip the instructions regarding Anaconda installations and install everything in your global interpreter.
 
-<details>
-  <summary>Epcot Center</summary>
-  <p>Epcot is a theme park at Walt Disney World Resort featuring exciting attractions, international pavilions, award-winning fireworks and seasonal special events.</p>
-  <b>hello</b>
-</details>
+<hr>
 
-
-
-
-
-<code>
-print(hello)
-</code>
-
-
-<blockquote><code>% Bin/*/MarchingCubes --in zeta.B.edt --out zeta.B.-2.ply --value -2</code></blockquote>
-<blockquote><code>% Bin/*/MarchingCubes --in zeta.B.edt --out zeta.B.0.ply  --value  0</code></blockquote>
-<blockquote><code>% Bin/*/MarchingCubes --in zeta.B.edt --out zeta.B.5.ply  --value  5</code></blockquote>
-
-
+<font size="+1"><b>Basic installation</b></font>
 
 ```bash
-hello world
+pip install -e . -r requirements_basic.txt --user
+echo 'export PATH=$PATH:$HOME/.local/bin' >> ~/.bashrc # Add your local bin to path
 ```
 
+<font size="+1"><b>Checkpoint cmd</b></font>
 
-##Install anaconda
-```
-wget -O ~/Downloads/Anaconda3-2023.03-Linux-x86_64.sh  https://repo.anaconda.com/archive/Anaconda3-2023.03-Linux-x86_64.sh
-
-bash  ~/Downloads/Anaconda3-2023.03-Linux-x86_64.sh 
+```bash
+surg_seg_ros_video_record --help
 ```
 
+<hr>
 
-close terminal to reload anaconda.
-
-Checkpoint command
-conda info
-
-### ambf install
-sudo apt install libasound2-dev libgl1-mesa-dev xorg-dev
-git clone https://github.com/WPI-AIM/ambf.git
-cd ambf && mkdir build
-cd build
-cmake ..
-make
-
-## Anaconda 
-Change surg_env for surg_seg
+<font size="+1"><b>Advance installation (Anaconda setup)</b></font>
 
 
-python packages
-https://www.activestate.com/resources/quick-reads/how-to-list-python-packages-globally-installed-vs-locally-installed/#:~:text=Locally%20installed%20Python%20and%20all,Local%5CPrograms%5C%20for%20Windows.
+Download anaconda install with 
+```bash
+  wget -O ~/Downloads/Anaconda3-2023.03-Linux-x86_64.sh  https://repo.anaconda.com/archive/Anaconda3-2023.03-Linux-x86_64.sh
+  bash  ~/Downloads/Anaconda3-2023.03-Linux-x86_64.sh 
+```
 
-python packages installed in system wide interpreter
-  WARNING: The script natsort is installed in '/home/juanbarragan/.local/bin' which is not on PATH.
-  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+During installation, you will be prompt to choose whether to initialize Anaconda Distribution by running conda init. Enter “yes”. After installation, excute the next instruction to prevent base environment automatic activation
+
+```bash
+conda config --set auto_activate_base False
+```
+
+Close your terminal sessions to have the changes take effect.
+
+**Note:** Keep in mind that having a Anaconda virtual env and ros env in the same terminal session can lead to problems. Do no install ROS or AMBF in a terminal session that has Anaconda activated.
+
+```bash
+cd <path-dVRK-segmentation-repo>
+sudo apt install ffmpeg # Required for data recording script
+conda create -n surg_seg python=3.9 numpy ipython  -y && conda activate surg_seg # Create and activate anacond virtual env
+pip install -e . -r requirements.txt --user #install all required packages on environment
+```
+
+The installation of the requirements will take about 2min-5min due to pytorch and cuda installations.
+
+<hr>
+
+Congratulations for making it to the end!
