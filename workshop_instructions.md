@@ -172,4 +172,16 @@ The installation of the requirements will take about 2min-5min due to pytorch an
 
 <hr>
 
+
+### <font size="+3"> <b>Workshop assets</b></font>
+
+To download pre-trained models and other assets please clone the following repository:
+
+```bash
+git clone https://github.com/dayon95/AMBFSegmentation.git
+
+```
+
+<hr>
+
 Congratulations for making it to the end!
