@@ -1,4 +1,4 @@
-# ISMR workshop 2023 - Hands-On Machine Learning in Simulation and Reality with the da Vinci Research Kit
+# Hands-On Machine Learning in Simulation and Reality with the da Vinci Research Kit
 
 
 |                    AMBF view                    |             AMBF + neural net predictions             |
