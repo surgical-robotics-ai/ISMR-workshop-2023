@@ -3,8 +3,8 @@
 In the following workshop, we will going through the process of training deep learning models for [robotic instrument segmentation](https://endovissub2017-roboticinstrumentsegmentation.grand-challenge.org/) using data generated from the AMBF simulator. After following this workshop, you will have trained a deep learning model who will received images from your simulated scene (left image) and generates masks on top instruments (right image).
 
 
-|        Video input to Network        | Video output (segmentations) from Network |
-| :----------------------------------: | :---------------------------------------: |
+|             Video input to Network              |       Video output (segmentations) from Network       |
+| :---------------------------------------------: | :---------------------------------------------------: |
 | <img src='./images/raw_video.gif' width="500"/> | <img src='./images/inferred_video.gif' width="500" /> |
 
 <hr>
@@ -13,11 +13,11 @@ In the following workshop, we will going through the process of training deep le
 
 This tutorial assumes you have access to a Ubuntu 20.04 machine with ROS noetic installed. To train the segmentation model you will need GPU with at least 12GB of memory and NVIDIA drivers installed on your pc. In case, of not having a big enough GPU for training we will be providing instructions and scripts to train the network on the cloud service [Google colab](https://colab.research.google.com/). 
 
-To run the necessary code we provide two different options:
-  1. Anaconda virtual environment setup: Recomended for people with access to a GPU in their laptop and who would like to run the neural network in real-time.
-  2. Python system wide setup: A minimal installation that allows the people to run the code without installing heavy dependencies such as pytorch or cuda. This instructions are only for people planning to use colab for the neural network training.  
+To run the necessary code we provide two different options
+  1. Python system wide setup: A minimal installation that allows the people to run the code without installing heavy dependencies such as pytorch or cuda. This instructions are only for people planning to use colab for the neural network training.  
+  2. Anaconda virtual environment setup (advanced): Recomended for people with access to a GPU in their laptop and who would like to run the neural network in real-time.
 
-**Note:** A third but not recommended option would be to install all the code dependencies in your system-wide python intepreter. Installing packages on your [system-wide interpreter](www.activestate.com/blog/how-to-manage-python-environments-global-vs-virtual/) is not usually recommended as it can lead to dependencies conflicts. If installing packages in your global interpreter is not a concern you, e.g., if you are working from a docker container, you can skip instructions regarding Anaconda installations and install everything in your global interpreter.
+**Note:** A third but not recommended option would be to install all the code dependencies in your system-wide python intepreter. Installing packages on your [system-wide interpreter](www.activestate.com/blog/how-to-manage-python-environments-global-vs-virtual/) is not usually recommended as it can lead to dependencies conflicts. If installing packages in your global interpreter is not a concern you, e.g., if you are working from a docker container, you can skip the instructions regarding Anaconda installations and install everything in your global interpreter.
 
 <hr>
 
@@ -37,9 +37,9 @@ Below are all the commands required to install AMBF. For more information about 
 
 ```bash
 
-
-apt-get install ros-noetic-cv-bridge ros-noetic-image-transport
-#CMD missing for AMBF dependencies
+# Install ambf dependencies
+sudo apt-get install libasound2-dev libgl1-mesa-dev xorg-dev
+sudo apt-get install ros-noetic-cv-bridge ros-noetic-image-transport
 
 source /opt/ros/noetic/setup.bash #source ros libraries
 git clone https://github.com/WPI-AIM/ambf
@@ -50,7 +50,9 @@ cmake ..
 make -j7
 ```
 
-If compilation was succesful it will be recommended to add both the AMBF executable to path and automatically source ROS and ambf in the your terminal session. You can a complish the following by the adding the following block of code to your `.bashrc`.
+**Note**: Do not continue unless compilation was succesful.
+
+After compilation, it will be recommended to add the AMBF executable to path and automatically source ROS and ambf in the your terminal session. You can a complish the following by the adding the following block of code to your `.bashrc`.
 
 ```bash
 #open bashrc
@@ -83,25 +85,52 @@ This commands should open a window with AMBF.
 
 ### <font size="+3"> <b>Surgical robotic assets installation</b></font>
 
-
-
 All information about the surgical Robotics Challenge can be seen ([here](https://github.com/jabarragann/surgical_robotics_challenge)). To download the assets follow below:
 
 ```bash
-#Download packages to stream images
-apt-get install ros-<version>-cv-bridge ros-<version>-image-transport
-#Clone surgical robotics challenge assets
+ros ##Assuming you setup the alias in the previous step 
 git clone https://github.com/jabarragann/surgical_robotics_challenge.git
+cd surgical_robotics_challenge/scripts
+pip install -e .
+
+python -c "import surgical_robotics_challenge; print(surgical_robotics_challenge.__file__)"
 ```
 
+**Note**: If you see an import error ask for help.
+
 <font size="+1"><b>Checkpoint cmd</b></font>
+
 ```bash
+cd <path-surgical-robotics-challenge>
 ./run_environment_3d_med.sh
 ```
 
+This will open the simulated suturing environment seen in the images above.
 
-### dVRK segmentation scripts installation
 
+<hr>
+
+### <font size="+3"> <b>dVRK segmentation scripts installation</b></font>
+
+All information about the dVRK segmentation scripts can be seen [here](https://github.com/Accelnet-project-repositories/dVRK-segmentation-models.git). To download the assets follow below:
+
+**Basic installation**
+
+```bash
+git clone https://github.com/Accelnet-project-repositories/dVRK-segmentation-models.git
+cd dVRK-segmentation-models
+pip install -e . -r requirements.txt
+```
+
+<div>
+<pre>
+<code>
+git clone https://github.com/Accelnet-project-repositories/dVRK-segmentation-models.git
+cd dVRK-segmentation-models
+pip install -e . -r requirements.txt
+</code>
+</pre>
+</div>
 
 # Test details
 
