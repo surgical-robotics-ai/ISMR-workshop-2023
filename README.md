@@ -4,10 +4,10 @@
 <center>
 <div>
     <div style="display: inline-block;">
-        <img src="images/raw_video.gif" width="400">
+        <img src="images/raw_video.gif" width="300">
     </div>,
     <div style="display: inline-block;">,
-        <img src="images/inferred_video.gif" width="400">,
+        <img src="images/inferred_video.gif" width="300">,
     </div>,
 </div>
 </center>
