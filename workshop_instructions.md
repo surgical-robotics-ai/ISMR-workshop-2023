@@ -142,7 +142,8 @@ surg_seg_ros_video_record --help
 
 <hr>
 
-<font size="+1"><b>Advance installation (Anaconda setup)</b></font>
+<details>
+<summary><font size="+1"><b>Advance installation (Anaconda setup)</b></font></summary>
 
 
 Download anaconda install with 
@@ -169,6 +170,7 @@ pip install -e . -r requirements.txt --user #install all required packages on en
 ```
 
 The installation of the requirements will take about 2min-5min due to pytorch and cuda installations.
+</details>
 
 <hr>
 
