@@ -143,7 +143,7 @@ surg_seg_ros_video_record --help
 <hr>
 
 <details>
-<summary><font size="+1"><b>Advance installation (Anaconda setup)</b></font></summary>
+<summary><font size="+1"><b>Advanced installation (Anaconda setup)</b></font></summary>
 
 
 Download anaconda install with 
