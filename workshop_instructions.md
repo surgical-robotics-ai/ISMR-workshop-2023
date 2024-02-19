@@ -47,10 +47,10 @@ cd ambf
 mkdir build 
 cd build
 cmake ..
-make -j7
+make -j8
 ```
 
-**Note**: Do not continue unless compilation was succesful.
+**Note**: Do not continue unless compilation is successful.
 
 After compilation, it will be recommended to add the AMBF executable to path and automatically source ROS and ambf in the your terminal session. You can a complish the following by the adding the following block of code to your `.bashrc`.
 
